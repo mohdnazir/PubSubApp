@@ -17,6 +17,10 @@ using System.Threading;
 using Timer = System.Timers.Timer;
 using PubSubApp.PubSub;
 using PubSubApp.WebSocketModule;
+using PubSubApp.Models;
+using Microsoft.Extensions.Options;
+using PubSubApp.Services;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace PubSubApp
 {
@@ -35,7 +39,8 @@ namespace PubSubApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => { option.EnableEndpointRouting = false; })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(options => options.UseMemberCasing());
             services.AddLogging(builder =>
             {
                 builder.AddConsole()
@@ -44,6 +49,13 @@ namespace PubSubApp
                     .AddFilter<DebugLoggerProvider>(category: null, level: LogLevel.Debug);
             });
             services.AddWebSocketManager();
+            services.Configure<PubSubAppDatabaseSettings>(
+                    Configuration.GetSection(nameof(PubSubAppDatabaseSettings)));
+
+            services.AddSingleton<IPubSubAppDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<PubSubAppDatabaseSettings>>().Value);
+
+            services.AddSingleton<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
