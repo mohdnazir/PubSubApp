@@ -36,10 +36,17 @@
     $(document).ready(function () {
         //option A
         $("#frmLogin").submit(function (e) {
-            e.preventDefault();
-            console.log($('#frmLogin'));
-            $.post('/api/chat', $('#frmLogin').serialize(), function (data) {
-                let data1 = { name: data.displayName, curr_date: new Date(), status: data.status };
+            e.preventDefault();            
+            $.post('/api/user', $('#frmLogin').serialize(), function (data) {
+                //console.log(data);
+                let data1 = {
+                    name: data.DisplayName,
+                    id: data.Id,
+                    userid: data.UserID,
+                    curr_date: new Date(),
+                    status: data.Status
+                };
+                
                 addActiveUser(data1);
                 $('#loginModel').modal('hide');
             })

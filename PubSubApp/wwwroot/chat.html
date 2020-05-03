@@ -18,9 +18,8 @@
     <link href="css/login.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-
-        <h3 class="text-center">Messaging</h3> <button id="btnLogin" class="btn btn-default" style="float:right; clear:both">Login</button>
+    <div class="container">        
+        <h3 class="text-center">Messaging</h3><button id="connect" style="visibility:hidden">Connect</button> <button id="btnLogin" class="btn btn-default" style="float:right; clear:both">Login</button>
 
         <div class="messaging">
             <div class="inbox_msg">
@@ -212,7 +211,7 @@
     </div>
 
     <script type="text/html" id='userTemplate'>
-        <div class="chat_list active_chat">
+        <div id="<%= id %>" data-userdata="" data-id="<%= id %>" data-userid="<%= userid %>" class="chat_list active_chat">
             <div class="chat_people">
                 <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                 <div class="chat_ib">

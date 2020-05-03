@@ -22,8 +22,19 @@ namespace PubSubApp.Services
         {
             var existingUser = Get(user.UserID);
             if (existingUser != null)
+            {
                 user.Id = existingUser.Id;
-            userList.InsertOne(user);
+                user.ModifiedAt = DateTime.Now;
+                user.CreatedAt = existingUser.CreatedAt;
+                userList.ReplaceOne(u => u.Id == existingUser.Id, user);
+            }
+            else
+            {
+                user.CreatedAt = DateTime.Now;
+                user.ModifiedAt = DateTime.Now;
+                userList.InsertOne(user);
+            }
+            
             return user;
         }
         public void Update(string id, User userIn) => userList.ReplaceOne(u => u.UserID == id, userIn);

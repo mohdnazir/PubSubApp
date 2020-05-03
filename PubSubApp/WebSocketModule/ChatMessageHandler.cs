@@ -14,7 +14,7 @@ namespace PubSubApp.WebSocketModule
 
         }
 
-        public override async Task OnConnected(WebSocket webSocket)
+        public override async Task OnConnected(WebSocket webSocket, string userId)
         {
             await base.OnConnected(webSocket);
 

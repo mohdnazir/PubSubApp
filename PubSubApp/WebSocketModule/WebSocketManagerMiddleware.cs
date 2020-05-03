@@ -23,9 +23,9 @@ namespace PubSubApp.WebSocketModule
         {
             if (!httpContext.WebSockets.IsWebSocketRequest)
                 return;
-
+            string userId = httpContext.Request.Query["userid"];
             var socket = await httpContext.WebSockets.AcceptWebSocketAsync();
-            await WebSocketHandler.OnConnected(socket);
+            await WebSocketHandler.OnConnected(socket, userId);
 
             await Receive(socket, async (result, buffer) =>
             {

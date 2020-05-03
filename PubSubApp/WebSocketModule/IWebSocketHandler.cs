@@ -8,7 +8,7 @@ namespace PubSubApp.WebSocketModule
 {
     public interface IWebSocketHandler
     {
-        Task OnConnected(WebSocket webSocket);
+        Task OnConnected(WebSocket webSocket, string userId);
         Task OnDisconnected(WebSocket webSocket);
         Task SendMessageAsync(WebSocket socket, string message);
         Task SendMessageAsync(string socketId, string message);

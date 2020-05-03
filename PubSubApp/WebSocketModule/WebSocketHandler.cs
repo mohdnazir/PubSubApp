@@ -17,7 +17,9 @@ namespace PubSubApp.WebSocketModule
             WebSocketConnectionManager = connectionManager;
         }
 
-        public virtual async Task OnConnected(WebSocket webSocket)
+        public abstract Task OnConnected(WebSocket webSocket, string userId);
+        
+        protected virtual async Task OnConnected(WebSocket webSocket)
         {
             WebSocketConnectionManager.AddSocket(webSocket);
         }
