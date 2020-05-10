@@ -86,7 +86,7 @@ namespace PubSubApp
             {
                 ser.SendMessageToAllAsync(DateTime.Now.ToLongTimeString());
             };
-            timer.Start();
+            //timer.Start();
 
             //EventAggregator eve = new EventAggregator();
             //pub = new Publisher(eve);

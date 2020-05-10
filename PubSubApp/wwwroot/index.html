@@ -69,7 +69,7 @@
         var scheme = document.location.protocol === "https:" ? "wss" : "ws";
         var port = document.location.port ? (":" + document.location.port) : "";
 
-        connectionUrl.value = scheme + "://" + document.location.hostname + port + "/ws" ;
+        connectionUrl.value = scheme + "://" + document.location.hostname + port + "/ws?userid=test" ;
 
         function updateState() {
             function disable() {

@@ -3,6 +3,7 @@ var port = document.location.port ? (":" + document.location.port) : "";
 var socket;
 var connectionUrl = scheme + "://" + document.location.hostname + port + "/ws";
 
+
 $(document).ready(function () {
 
     $("#btnLogin").click(function () {
@@ -12,14 +13,33 @@ $(document).ready(function () {
         });
     });
 
-    $("#frmLogin").on("submit", function () {
-        alert('test');
-    });
+    //$("#frmLogin").on("submit", function () {
+    //    alert('test');
+    //});
 
-    $("#connect").click(function (event) {
-        console.log(event);
-        alert('connected');
-    })
+    //$("#connect").click(function (event) {
+    //    console.log(event);
+    //    alert('connected');
+    //});
+
+    $(".msg_send_btn").click(function (event) {
+        if (!socket || socket.readyState !== WebSocket.OPEN) {
+            alert("socket not connected");
+        }
+        let data = {
+            Topic: "nazir",
+            Msg: $(".write_msg").val()
+        }
+        socket.send(JSON.stringify(data));
+        $(".write_msg").val('');
+        //commsLog.innerHTML += '<tr>' +
+        //    '<td class="commslog-client">Client</td>' +
+        //    '<td class="commslog-server">Server</td>' +
+        //    '<td class="commslog-data">' + htmlEscape(data) + '</td></tr>';
+        let outgoing_msg = $("#outgoing_msg").html();
+        var compiled = _.template(outgoing_msg);
+        $(".msg_history").append(compiled(data));
+    });
 });
 
 function addActiveUser(data) {
@@ -34,7 +54,7 @@ function addActiveUser(data) {
 
 function connect(userid) {
     //stateLabel.innerHTML = "Connecting";
-    
+
     socket = new WebSocket(connectionUrl + "?userid=" + userid);
     socket.onopen = function (event) {
         //updateState();
@@ -50,10 +70,16 @@ function connect(userid) {
     };
     socket.onerror = updateState;
     socket.onmessage = function (event) {
+        //console.log(event.data);
+        //$(".msg_history").append(event.data);
         //commsLog.innerHTML += '<tr>' +
         //    '<td class="commslog-server">Server</td>' +
         //    '<td class="commslog-client">Client</td>' +
         //    '<td class="commslog-data">' + htmlEscape(event.data) + '</td></tr>';
+
+        let incoming_msg = $("#incoming_msg").html();
+        var compiled = _.template(incoming_msg);        
+        $(".msg_history").append(compiled(JSON.parse(event.data)));
     };
 }
 

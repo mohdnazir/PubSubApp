@@ -14,11 +14,11 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
     <link href="css/chat.css" type="text/css" rel="stylesheet" />
-    <script src="scripts/chat.js"></script>
+    <script src="scripts/chat.js?a=4"></script>
     <link href="css/login.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">        
+    <div class="container">
         <h3 class="text-center">Messaging</h3><button id="connect" style="visibility:hidden">Connect</button> <button id="btnLogin" class="btn btn-default" style="float:right; clear:both">Login</button>
 
         <div class="messaging">
@@ -126,7 +126,7 @@
                 </div>
                 <div class="mesgs">
                     <div class="msg_history">
-                        <div class="incoming_msg">
+                        <!--<div class="incoming_msg">
                             <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                             <div class="received_msg">
                                 <div class="received_withd_msg">
@@ -174,7 +174,7 @@
                                     <span class="time_date"> 11:01 AM    |    Today</span>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="type_msg">
                         <div class="input_msg_write">
@@ -220,6 +220,30 @@
                         <%= status %>
                     </p>
                 </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/html" id="incoming_msg">
+        <div class="incoming_msg">
+            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+            <div class="received_msg">
+                <div class="received_withd_msg">
+                    <p>
+                        <%= Msg%>
+                    </p>
+                    <span class="time_date"> 11:01 AM    |    June 9</span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="outgoing_msg">
+        <div class="outgoing_msg">
+            <div class="sent_msg">
+                <p>
+                    <%= Msg%>
+                </p>
+                <span class="time_date"> 11:01 AM    |    June 9</span>
             </div>
         </div>
     </script>
