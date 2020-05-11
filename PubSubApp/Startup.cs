@@ -14,7 +14,7 @@ using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using System.Threading;
-using Timer = System.Timers.Timer;
+//using Timer = System.Timers.Timer;
 using PubSubApp.PubSub;
 using PubSubApp.WebSocketModule;
 using PubSubApp.Models;
@@ -26,7 +26,7 @@ namespace PubSubApp
 {
     public class Startup
     {
-        Timer timer;
+        //Timer timer;
         //TimeServiceHandler timeService;
         public Startup(IConfiguration configuration)
         {
@@ -81,11 +81,11 @@ namespace PubSubApp
             app.UseStaticFiles();
             //app.UseFileServer();
 
-            timer = new Timer(5000);
-            timer.Elapsed += (a, b) =>
-            {
-                ser.SendMessageToAllAsync(DateTime.Now.ToLongTimeString());
-            };
+            //timer = new Timer(5000);
+            //timer.Elapsed += (a, b) =>
+            //{
+            //    ser.SendMessageToAllAsync(DateTime.Now.ToLongTimeString());
+            //};
             //timer.Start();
 
             //EventAggregator eve = new EventAggregator();

@@ -35,7 +35,6 @@ namespace PubSubApp.Controllers
             return user;
         }
 
-
         // POST: api/Chat
         [HttpPost]
         public ActionResult<User> Post([FromForm] User user)

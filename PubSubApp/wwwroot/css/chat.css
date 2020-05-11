@@ -213,3 +213,12 @@ img {
     height: 516px;
     overflow-y: auto;
 }
+
+.inbox_chat .ui-selecting {
+    background: #cdcdcd;
+}
+
+.inbox_chat .ui-selected {
+    background: #ebebeb;
+    color: white;
+}

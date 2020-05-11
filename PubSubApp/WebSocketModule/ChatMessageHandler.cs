@@ -29,11 +29,16 @@ namespace PubSubApp.WebSocketModule
 
         public override async Task ReceiveAsync(WebSocket socket, WebSocketReceiveResult result, byte[] buffer)
         {
-            var connectionId = WebSocketConnectionManager.GetId(socket);
+            //var connectionId = WebSocketConnectionManager.GetId(socket);
             var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
             Message o = JsonConvert.DeserializeObject<Message>(message);
+           var topicList = topicManager.GetUserSocketMap(o.Topic);
             //await SendMessageToAllAsync(message);
-            await SendMessageAsync(connectionId, JsonConvert.SerializeObject(o));
+            foreach (var item in topicList)
+            {
+                Message m = new Message() { Topic = item.userid, Msg = o.Msg };
+                await SendMessageAsync(item.connectionId, JsonConvert.SerializeObject(m));
+            }            
         }
     }
 }
